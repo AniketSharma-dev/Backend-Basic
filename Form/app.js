@@ -12,6 +12,9 @@ const app = express();
 //this are built in middle ware we use for getting data from req.body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// for showing css on front end
+app.use(express.static('public'))
+
 
 app.use(morgan("dev"));
 

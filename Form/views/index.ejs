@@ -3,12 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="index.css">
+    <!-- how you can link css from public folder -->
+    <link rel="stylesheet" href="index.css" />
     <title>Document</title>
   </head>
   <body>
     <!-- <form action="/get-form-date">  we can use this for .get but we get form data on url so we use .post and for .post we need to set its methord to post -->
-    <form action="/get-form-date" method="post">  <!-- here how to handel .post -->
+    <form action="/get-form-date" method="post">
+      <!-- here how to handel .post -->
       <div class="mb-3">
         <label for="Username" class="form-label">Username</label>
         <input
@@ -42,7 +44,12 @@
           aria-describedby="Password Id"
         />
       </div>
-      <button  class="btn btn-primary">Submit</button>
+      <button class="btn btn-primary">Submit</button>
     </form>
+
+    <script src="index.js"></script>
+    <!-- this is how u link from public folder and down there how u can do inside an folder in public-->
+    <script src="/assets/index.js"></script>
+    <!-- this is how you can link any fine from any folder in ejs-->
   </body>
 </html>

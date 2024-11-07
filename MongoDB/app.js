@@ -1,7 +1,7 @@
 const express = require("express"); //requireing express
 const morgan = require("morgan"); // morgan a 3rd party middleware
 const app = express(); //assigning express to app
-const dbConnection = require("./config/db");
+const dbConnection = require("./config/db"); // importing db connection
 const userModel = require("./models/user"); //importing user model
 
 const PORT = 3000; //PORT 3000
@@ -22,18 +22,35 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-// we can use this but the issue is we get see the form data in url and for solving that problem we use .post EX.
-// app.get("/get-form-date",(req,res)=>{
-//   console.log(req.query); // we can use this for .get
-//   res.send('data-received')
+app.get("/register", (req, res) => {
+  res.render("register");
+});
 
-// })
+//this is asynchronous code and this not gonna run till the user not created and it get in queue.
+// app.post("/register", (req, res) => {
+//   const { username, email, password } = req.body;
+//   userModel.create({
+//     username: username,
+//     email: email,
+//     password: password,
+//   }); // so this code get in Q
+//   res.send("User Register"); // and this line executed which give error bc we dont know whenuser register
+// });
 
-// .post how to use
+// so we use async await
+app.post("/register", async (req, res) => {
+  const { username, email, password } = req.body;
+ const newUser = await userModel.create({
+    username: username,
+    email: email,
+    password: password,
+  });
+  res.send(newUser);
+});
+
 app.post("/get-form-date", (req, res) => {
-  console.log(req.body); // for .post we need to use .body and when we use this we get data as undefine so we use built in middleware EX. on top
+  console.log(req.body);
   res.send("data-received");
 });
 
-// on "listning on PORT WHICH IS 3000"
 app.listen(PORT);
